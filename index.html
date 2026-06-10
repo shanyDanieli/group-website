@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Danieli Research Group · Tel Aviv University</title>
+<meta name="description" content="The Danieli Research Group for Galaxy Evolution, Dark Matter, and the Low Surface Brightness Universe at Tel Aviv University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000000;
+    --panel:#0a0a0d;
+    --ink:#ffffff;
+    --dim:#aeb2bd;
+    --faint:#6c7080;
+    --pink:#f3b9d8;
+    --blue:#3a6bff;
+    --line:rgba(255,255,255,.10);
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:'Sora',sans-serif;font-weight:300;letter-spacing:.01em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  /* ---------- top bar ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.78);
+    backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .bar{max-width:var(--maxw);margin:0 auto;padding:16px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .brand{font-family:'Sora',sans-serif;font-weight:400;font-size:1.05rem;cursor:pointer}
+  .brand small{display:block;color:var(--faint);font-size:.7rem;letter-spacing:.18em;
+    text-transform:uppercase;margin-top:2px;font-family:'Inter'}
+  nav{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
+  nav button{background:none;border:none;cursor:pointer;color:var(--dim);
+    font-family:'Inter';font-size:.92rem;padding:4px 0;position:relative;transition:color .2s}
+  nav button:hover{color:var(--ink)}
+  nav button.active{color:var(--blue)}
+  nav button.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--blue)}
+  .lang{color:var(--faint);font-size:.95rem;border-left:1px solid var(--line);padding-left:22px}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:72vh;display:flex;align-items:center;justify-content:center;
+    text-align:center;overflow:hidden;isolation:isolate}
+  .hero .bgimg{position:absolute;inset:-4%;background:url('img/hudf.jpg') center/cover no-repeat;
+    z-index:-2;animation:drift 70s ease-in-out infinite alternate}
+  @keyframes drift{from{transform:scale(1)}to{transform:scale(1.1)}}
+  .hero::after{content:"";position:absolute;inset:0;z-index:-1;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.45),rgba(0,0,0,.75))}
+  .hero-inner{max-width:860px;padding:90px 28px}
+  .hero h1{font-size:clamp(1.8rem,4.2vw,3.3rem);line-height:1.16;text-shadow:0 2px 30px rgba(0,0,0,.8)}
+  .hero h1 .glow{color:var(--pink)}
+  .credit{margin-top:30px;color:rgba(255,255,255,.55);font-size:.72rem;letter-spacing:.05em}
+
+  .page-hero{position:relative;padding:110px 28px;text-align:center;overflow:hidden;isolation:isolate}
+  .page-hero .bgimg{position:absolute;inset:-4%;background:url('img/hudf.jpg') center/cover no-repeat;z-index:-2;filter:saturate(.85)}
+  .page-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(0,0,0,.72)}
+  .page-hero h1{font-size:clamp(1.9rem,3.6vw,2.8rem)}
+
+  /* ---------- layout ---------- */
+  main{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .page{display:none;animation:fade .45s ease}
+  .page.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  section.block{padding:76px 0;border-bottom:1px solid var(--line)}
+  section.block:last-child{border-bottom:none}
+  .eyebrow{color:var(--blue);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:18px}
+  h2{font-size:clamp(1.6rem,3.2vw,2.4rem);margin-bottom:24px}
+  .lead{max-width:700px;color:var(--dim);font-size:1.05rem}
+  .lead p+p{margin-top:18px}
+  .cols{display:grid;grid-template-columns:.7fr 1.3fr;gap:48px;align-items:start}
+
+  ul.questions{list-style:none;counter-reset:q}
+  ul.questions li{padding:16px 0;border-top:1px solid var(--line);color:var(--dim);display:flex;gap:16px}
+  ul.questions li::before{content:counter(q,decimal-leading-zero);counter-increment:q;
+    color:var(--pink);font-family:'Sora';font-size:.85rem;min-width:34px;padding-top:2px}
+
+  .btn{display:inline-block;margin-top:30px;background:var(--pink);color:#1a1320;
+    padding:13px 26px;font-weight:600;font-size:.92rem;border-radius:2px;
+    border:none;cursor:pointer;font-family:'Inter';transition:transform .15s,box-shadow .2s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(243,185,216,.25)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.3)}
+  .btn.ghost:hover{border-color:var(--pink);color:var(--pink);box-shadow:none}
+
+  /* funding — full-width white band */
+  .band-white{background:#ffffff;color:#15151a;text-align:center}
+  .band-inner{max-width:var(--maxw);margin:0 auto;padding:76px 28px}
+  .band-white h2{color:#15151a}
+  .band-white .eyebrow{color:var(--blue)}
+  .funding{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-top:40px}
+  .funding img{height:92px;width:auto}
+  @media(max-width:860px){.funding{justify-content:center;gap:48px}.funding img{height:70px}}
+
+  /* team */
+  .pi-card{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:start;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:36px;margin-bottom:46px}
+  .pi-card img{border-radius:6px;width:100%}
+  .pi-card h3{font-size:1.5rem;margin-bottom:4px}
+  .role{color:var(--pink);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+  .bio{color:var(--dim);font-size:.97rem}
+  .email{display:inline-block;margin-top:16px;color:var(--blue);font-size:.9rem}
+  .email:hover{text-decoration:underline}
+  .team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+  .person{background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+  .person:hover{transform:translateY(-4px);border-color:rgba(243,185,216,.4)}
+  .person img{aspect-ratio:1;object-fit:cover;width:100%}
+  .person .info{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .person h3{font-size:1.1rem;font-weight:400;margin-bottom:2px}
+  .person .role{margin-bottom:12px}
+  .person .bio{font-size:.88rem;flex:1}
+  .you-card .ph{aspect-ratio:1;background:
+    radial-gradient(circle at 30% 25%,rgba(243,185,216,.25),transparent 60%),
+    radial-gradient(circle at 75% 70%,rgba(58,107,255,.2),transparent 55%),#101016;
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Sora';font-size:3rem;color:var(--pink);font-weight:200}
+
+  /* publications */
+  .pub-intro{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+  .pub{padding:24px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:64px 1fr;gap:20px}
+  .pub .yr{color:var(--blue);font-family:'Sora';font-size:.95rem;padding-top:2px}
+  .pub h3{font-size:1.06rem;font-weight:400;margin-bottom:6px;line-height:1.45}
+  .pub h3 a:hover{color:var(--pink)}
+  .pub .authors{color:var(--faint);font-size:.86rem}
+  .pub .authors b{color:var(--dim);font-weight:500}
+  .pub .venue{color:var(--dim);font-size:.86rem;font-style:italic;margin-top:2px}
+  .subhead{font-family:'Sora';font-weight:400;font-size:1.25rem;margin:54px 0 8px;color:var(--pink)}
+  .subhead:first-of-type{margin-top:38px}
+  .subnote{color:var(--faint);font-size:.86rem;margin-bottom:14px}
+
+  /* news */
+  .feature{display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:34px;margin-bottom:48px}
+  .feature img{border-radius:6px;width:100%;aspect-ratio:1;object-fit:cover}
+  .news-item{padding:26px 0;border-top:1px solid var(--line)}
+  .date{color:var(--blue);font-size:.8rem;letter-spacing:.08em;margin-bottom:6px}
+  .news-item h3,.feature h3{font-size:1.25rem;font-weight:400;margin-bottom:10px}
+  .news-item p,.feature p{color:var(--dim);max-width:720px;font-size:.96rem}
+  .more{display:inline-block;margin-top:14px;color:var(--pink);font-size:.9rem}
+  .more:hover{text-decoration:underline}
+
+  /* footer / contact */
+  footer{border-top:1px solid var(--line);margin-top:40px}
+  .foot-grid{max-width:var(--maxw);margin:0 auto;padding:64px 28px;
+    display:grid;grid-template-columns:1fr 1fr;gap:60px}
+  footer h3{font-size:1.3rem;margin-bottom:22px}
+  .addr{color:var(--dim);font-size:.92rem;line-height:1.9}
+  .addr a{color:var(--blue)}
+  .addr a:hover{text-decoration:underline}
+  form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  input,textarea{width:100%;background:#0d0d11;border:1px solid var(--line);border-radius:4px;
+    color:var(--ink);padding:12px 14px;font-family:'Inter';font-size:.9rem}
+  input:focus,textarea:focus{outline:none;border-color:var(--blue)}
+  textarea{min-height:110px;resize:vertical;margin-bottom:14px}
+  .legal{max-width:var(--maxw);margin:0 auto;padding:22px 28px;border-top:1px solid var(--line);
+    color:var(--faint);font-size:.82rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+  .legal a:hover{color:var(--ink)}
+
+  @media(max-width:860px){
+    .cols,.pi-card,.feature,.foot-grid,form .row{grid-template-columns:1fr}
+    .pi-card img,.feature img{max-width:320px}
+  }
+  *:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){.hero .bgimg{animation:none}.page{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="bar">
+    <div class="brand" data-page="home">The Danieli Research Group<small>Tel Aviv University</small></div>
+    <nav id="nav">
+      <button class="active" data-page="home">Home</button>
+      <button data-page="research">Research</button>
+      <button data-page="team">Team</button>
+      <button data-page="publications">Publications</button>
+      <button data-page="news">News</button>
+      <a class="lang" href="#" title="Hebrew version coming soon">עב</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ==================== HOME ==================== -->
+<div class="page active" id="home">
+  <div class="hero">
+    <div class="bgimg" role="img" aria-label="The Hubble Ultra Deep Field"></div>
+    <div class="hero-inner">
+      <h1>The Danieli Research Group for<br><span class="glow">Galaxy Evolution, Dark Matter, and the<br>Low Surface Brightness Universe</span><br>at Tel Aviv University</h1>
+      <div class="credit">The Hubble Ultra Deep Field · NASA/ESA/STScI/HST/HUDF Team · NASA/Goddard/LRO</div>
+    </div>
+  </div>
+
+  <main>
+    <section class="block">
+      <div class="cols">
+        <div><p class="eyebrow">Overview</p><h2>The faintest galaxies in the nearby universe</h2></div>
+        <div class="lead">
+          <p>Our research group explores the faintest and most elusive galaxies in the nearby universe — systems so diffuse and low-mass that they often escape traditional surveys.</p>
+          <p>By combining ultra-deep observations from ground- and space-based telescopes with creative, data-driven discovery techniques, we uncover hidden populations of dwarf and low-surface-brightness galaxies beyond the Milky Way.</p>
+          <p>These galaxies serve as powerful laboratories for understanding how galaxies form, how dark matter shapes structure on small scales, and how visible and invisible matter co-evolve across cosmic time.</p>
+          <button class="btn" data-page="team">Meet the Team</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="cols">
+        <div><p class="eyebrow">Our big questions</p><h2>What we're chasing</h2></div>
+        <ul class="questions">
+          <li>How common are low-mass and ultra-faint galaxies beyond the Local Group, and what is their true census in the nearby universe?</li>
+          <li>How does dark matter shape the structure and dynamics of the smallest galaxies?</li>
+          <li>What is the relationship between dark matter and visible matter in galaxies at the lowest masses?</li>
+          <li>Which physical processes govern the formation and evolution of low-mass galaxies?</li>
+          <li>What new astrophysical phenomena emerge when we push observations into the low-surface-brightness universe?</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="band-white">
+    <div class="band-inner">
+      <p class="eyebrow">Funding</p>
+      <h2>Our work is supported by</h2>
+      <div class="funding">
+        <img src="img/isf.jpg" alt="Israel Science Foundation">
+        <img src="img/erc.jpg" alt="European Research Council">
+        <img src="img/azrieli.jpg" alt="Azrieli Foundation">
+        <img src="img/bsf.jpg" alt="United States–Israel Binational Science Foundation (NSF-BSF)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== RESEARCH ==================== -->
+<div class="page" id="research">
+  <div class="page-hero"><div class="bgimg"></div><h1>Research</h1></div>
+  <main>
+    <section class="block">
+      <div class="cols">
+        <div><p class="eyebrow">What we do</p><h2>Probing the low-surface-brightness sky</h2></div>
+        <div class="lead">
+          <p>Most of what we know about galaxies comes from the bright end of the population — the systems that are easy to see. Our group works at the opposite limit: the diffuse, low-mass galaxies whose light is spread so thinly across the sky that they hide below the detection thresholds of conventional surveys.</p>
+          <p>We pursue them with ultra-deep imaging from instruments like the Dragonfly Telephoto Array, wide-field surveys such as Merian, and follow-up observations from space- and ground-based observatories. Alongside the observations, we develop data-driven detection methods designed to recognize faint, extended structure in very large datasets.</p>
+          <p>Because the lowest-mass galaxies are dominated by dark matter, every new system we find is also a small-scale test of cosmology — a probe of how dark matter behaves where its influence is strongest.</p>
+        </div>
+      </div>
+    </section>
+    <section class="block">
+      <p class="eyebrow">Coming soon</p>
+      <h2>Research themes</h2>
+      <p class="lead">We're building this section out — detailed pages on each research thread, with images and key results, are on the way.</p>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== TEAM ==================== -->
+<div class="page" id="team">
+  <div class="page-hero"><div class="bgimg"></div><h1>Our Team</h1></div>
+  <main>
+    <section class="block">
+      <div class="pi-card">
+        <img src="img/shany.jpg" alt="Dr. Shany Danieli">
+        <div>
+          <h3>Shany Danieli, Ph.D.</h3>
+          <div class="role">Principal Investigator</div>
+          <p class="bio">Dr. Danieli is an Assistant Professor in the Physics and Astronomy School at Tel Aviv University, Israel. She obtained her PhD from Yale University under the supervision of Prof. Pieter van Dokkum, after which she was a NASA Hubble Fellow and a Carnegie-Princeton Fellow at Princeton University and the IAS.</p>
+          <a class="email" href="mailto:sdanieli@tauex.tau.ac.il">sdanieli@tauex.tau.ac.il</a>
+        </div>
+      </div>
+
+      <div class="team-grid">
+        <div class="person">
+          <img src="img/inbar.jpg" alt="Inbar Havilio">
+          <div class="info">
+            <h3>Inbar Havilio</h3>
+            <div class="role">PhD Student</div>
+            <p class="bio">Inbar Havilio is a PhD student supervised by Dr. Shany Danieli. Her research focuses on the mutual relationship between dwarf galaxies and dark matter haloes, using statistical methods applied to both observations and simulations. She completed her MSc at the Weizmann Institute under the supervision of Dr. Kfir Blum.</p>
+            <a class="email" href="mailto:havilio@mail.tau.ac.il">havilio@mail.tau.ac.il</a>
+          </div>
+        </div>
+        <div class="person">
+          <img src="img/goni.jpg" alt="Goni Elbaz">
+          <div class="info">
+            <h3>Goni Elbaz</h3>
+            <div class="role">MSc Student</div>
+            <p class="bio">Goni Elbaz is a Master's student in the Physics and Astronomy School at Tel Aviv University. She obtained her Bachelor's degree from Ben-Gurion University of the Negev, Israel.</p>
+            <a class="email" href="mailto:gonielbaz@mail.tau.ac.il">gonielbaz@mail.tau.ac.il</a>
+          </div>
+        </div>
+        <div class="person">
+          <img src="img/daniel.jpg" alt="Daniel Pakula">
+          <div class="info">
+            <h3>Daniel Pakula</h3>
+            <div class="role">MSc Student</div>
+            <p class="bio">Daniel is a double major in Physics and East Asian Studies at Tel Aviv University. He studies low-surface-brightness galaxies and their implications for cold dark matter in the ΛCDM framework, developing automated detection systems for data from the Dragonfly telescope. Previously, he gained extensive experience in cybersecurity and vulnerability research. Alongside his physics studies, he focuses on East Asia and speaks Japanese.</p>
+            <a class="email" href="mailto:danielpakula@mail.tau.ac.il">danielpakula@mail.tau.ac.il</a>
+          </div>
+        </div>
+        <div class="person you-card">
+          <div class="ph">You?</div>
+          <div class="info">
+            <h3>Join us</h3>
+            <div class="role">MSc Student · PhD Student</div>
+            <p class="bio">We're always looking for curious, motivated students who want to hunt for the galaxies nobody else can see. Get in touch to hear about open projects.</p>
+            <a class="email" href="mailto:sdanieli@tauex.tau.ac.il">sdanieli@tauex.tau.ac.il</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== PUBLICATIONS ==================== -->
+<div class="page" id="publications">
+  <div class="page-hero"><div class="bgimg"></div><h1>Publications</h1></div>
+  <main>
+    <section class="block">
+      <div class="pub-intro">
+        <div>
+          <p class="eyebrow">Publications</p>
+          <h2 style="margin-bottom:8px">Publications</h2>
+          <p class="lead" style="font-size:.95rem">69 publications in total — 33 as first, second, or third author, and 36 additional co-authored papers.</p>
+        </div>
+        <a class="btn ghost" style="margin-top:0" href="https://ui.adsabs.harvard.edu/public-libraries/azDcEhHjSzeIa4L0CzyY6Q" target="_blank" rel="noopener">Full library on ADS ↗</a>
+      </div>
+
+      <h3 class="subhead">First, second, and third-author publications</h3>
+      <p class="subnote">Papers led or co-led by group members. Titles link to ADS.</p>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>33. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1002...75L" target="_blank" rel="noopener">ELVES-Dwarf. I. Satellite Systems of Eight Isolated Dwarf Galaxies in the Local Volume</a></h3>
+        <div class="authors">Li J., Greene J., <b>Danieli S.</b>, Carlsten S., Geha M., Jiang F., Tanaka M.</div>
+        <div class="venue">The Astrophysical Journal, 1002, 75 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>32. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1000..119P" target="_blank" rel="noopener">The Merian Survey: A Statistical Census of Bright Satellites of Milky Way Analogs</a></h3>
+        <div class="authors">Pan Y., <b>Danieli S.</b>, Greene J., Li J., Leauthaud A., Kado-Fong E., Luo Y., Mintz A., Brooks A., Huang S., Peter A., Bhattacharyya J., et al.</div>
+        <div class="venue">The Astrophysical Journal, 1000, 119 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>31. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ...998L..24L" target="_blank" rel="noopener">A Possible “Too-many-satellites” Problem in the Isolated Dwarf Galaxy DDO 161</a></h3>
+        <div class="authors">Li J., Greene J., <b>Danieli S.</b>, Carlsten S., Geha M.</div>
+        <div class="venue">The Astrophysical Journal Letters, 998, L24 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>30. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...993..110D" target="_blank" rel="noopener">First Data Release of the Merian Survey: A Wide-field Imaging Survey of Dwarf Galaxies at z ~ 0.06─0.10</a></h3>
+        <div class="authors"><b>Danieli S.</b>, Kado-Fong E., Huang S., Luo Y., Li T., Kelvin L., Leauthaud A., Greene J., Mintz A., Lin X., Li J., Baldassare V., et al.</div>
+        <div class="venue">The Astrophysical Journal, 993, 110 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2024</div><div>
+        <h3>29. <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...964...53L" target="_blank" rel="noopener">Constrain the Dark-matter Distribution of Ultra-diffuse Galaxies with Globular-cluster Mass Segregation: A Case Study with NGC5846-UDG1</a></h3>
+        <div class="authors">Liang J., Jiang F., <b>Danieli S.</b>, Benson A., Hopkins P.</div>
+        <div class="venue">The Astrophysical Journal, 964, 53 (2024)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>28. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...957....6S" target="_blank" rel="noopener">Confirmation of an Anomalously Low Dark Matter Content for the Galaxy NGC 1052-DF4 from Deep, High-resolution Continuum Spectroscopy</a></h3>
+        <div class="authors">Shen Z., van Dokkum P., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal, 957, 6 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>27. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...956....6D" target="_blank" rel="noopener">ELVES. IV. The Satellite Stellar-to-halo Mass Relation Beyond the Milky Way</a></h3>
+        <div class="authors"><b>Danieli S.</b>, Greene J., Carlsten S., Jiang F., Beaton R., Goulding A.</div>
+        <div class="venue">The Astrophysical Journal, 956, 6 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>26. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...949...94G" target="_blank" rel="noopener">ELVES. III. Environmental Quenching by Milky Way-mass Hosts</a></h3>
+        <div class="authors">Greene J., <b>Danieli S.</b>, Carlsten S., Beaton R., Jiang F., Li J.</div>
+        <div class="venue">The Astrophysical Journal, 949, 94 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>25. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...950..178M" target="_blank" rel="noopener">Distinguishing Dark Matter Cusps from Cores Using Globular Clusters</a></h3>
+        <div class="authors">Modak S., <b>Danieli S.</b>, Greene J.</div>
+        <div class="venue">The Astrophysical Journal, 950, 178 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>24. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...941...26G" target="_blank" rel="noopener">ArtPop: A Stellar Population and Image Simulation Python Package</a></h3>
+        <div class="authors">Greco J., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal, 941, 26 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>23. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...935..160K" target="_blank" rel="noopener">Tidal Distortions in NGC1052-DF2 and NGC1052-DF4: Independent Evidence for a Lack of Dark Matter</a></h3>
+        <div class="authors">Keim M., van Dokkum P., <b>Danieli S.</b>, Lokhorst D., Li J., Shen Z., Abraham R., Chen S., Gilhuly C., Liu Q., Merritt A., Miller T., et al.</div>
+        <div class="venue">The Astrophysical Journal, 935, 160 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>22. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...932L..10B" target="_blank" rel="noopener">Dynamical Friction in Globular Cluster-rich Ultra-diffuse Galaxies: The Case of NGC5846-UDG1</a></h3>
+        <div class="authors">Bar N., <b>Danieli S.</b>, Blum K.</div>
+        <div class="venue">The Astrophysical Journal Letters, 932, L10 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>21. <a href="https://ui.adsabs.harvard.edu/abs/2022NatAs...6..496M" target="_blank" rel="noopener">Galaxies lacking dark matter produced by close encounters in a cosmological simulation</a></h3>
+        <div class="authors">Moreno J., <b>Danieli S.</b>, Bullock J., Feldmann R., Hopkins P., \ccatmabacak O., Gurvich A., Lazar A., Klein C., Hummels C., Hafen Z., Mercado F., et al.</div>
+        <div class="venue">Nature Astronomy, 6, 496-502 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>20. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...927L..28D" target="_blank" rel="noopener">NGC 5846-UDG1: A Galaxy Formed Mostly by Star Formation in Massive, Extremely Dense Clumps of Gas</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P., Trujillo-Gomez S., Kruijssen J., Romanowsky A., Carlsten S., Shen Z., Li J., Abraham R., Brodie J., Conroy C., Gannon J., et al.</div>
+        <div class="venue">The Astrophysical Journal Letters, 927, L28 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>19. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...914L..23P" target="_blank" rel="noopener">A Recently Quenched Isolated Dwarf Galaxy Outside of the Local Group Environment</a></h3>
+        <div class="authors">Polzin A., van Dokkum P., <b>Danieli S.</b>, Greco J., Romanowsky A.</div>
+        <div class="venue">The Astrophysical Journal Letters, 914, L23 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>18. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...914L..12S" target="_blank" rel="noopener">A Tip of the Red Giant Branch Distance of 22.1 ± 1.2 Mpc to the Dark Matter Deficient Galaxy NGC 1052-DF2 from 40 Orbits of Hubble Space Telescope Imaging</a></h3>
+        <div class="authors">Shen Z., <b>Danieli S.</b>, van Dokkum P., Abraham R., Brodie J., Conroy C., Dolphin A., Romanowsky A., Kruijssen J., Dutta Chowdhury D.</div>
+        <div class="venue">The Astrophysical Journal Letters, 914, L12 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>17. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...909..179S" target="_blank" rel="noopener">A Complex Luminosity Function for the Anomalous Globular Clusters in NGC 1052-DF2 and NGC 1052-DF4</a></h3>
+        <div class="authors">Shen Z., van Dokkum P., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal, 909, 179 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>16. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...909...74M" target="_blank" rel="noopener">The Dragonfly Wide Field Survey. II. Accurate Total Luminosities and Colors of Nearby Massive Galaxies and Implications for the Galaxy Stellar-mass Function</a></h3>
+        <div class="authors">Miller T., van Dokkum P., <b>Danieli S.</b>, Li J., Abraham R., Conroy C., Gilhuly C., Greco J., Liu Q., Lokhorst D., Merritt A.</div>
+        <div class="venue">The Astrophysical Journal, 909, 74 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>15. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...908...24G" target="_blank" rel="noopener">Measuring Distances to Low-luminosity Galaxies Using Surface Brightness Fluctuations</a></h3>
+        <div class="authors">Greco J., van Dokkum P., <b>Danieli S.</b>, Carlsten S., Conroy C.</div>
+        <div class="venue">The Astrophysical Journal, 908, 24 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2020</div><div>
+        <h3>14. <a href="https://ui.adsabs.harvard.edu/abs/2020PASP..132g4503V" target="_blank" rel="noopener">Multi-resolution Filtering: An Empirical Method for Isolating Faint, Extended Emission in Dragonfly Data and Other Low Resolution Images</a></h3>
+        <div class="authors">van Dokkum P., Lokhorst D., <b>Danieli S.</b>, Li J., Merritt A., Abraham R., Gilhuly C., Greco J., Liu Q.</div>
+        <div class="venue">PASP, 132, 074503 (2020)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2020</div><div>
+        <h3>13. <a href="https://ui.adsabs.harvard.edu/abs/2020ApJ...895L...4D" target="_blank" rel="noopener">A Tip of the Red Giant Branch Distance to the Dark Matter Deficient Galaxy NGC 1052-DF4 from Deep Hubble Space Telescope Data</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P., Abraham R., Conroy C., Dolphin A., Romanowsky A.</div>
+        <div class="venue">The Astrophysical Journal Letters, 895, L4 (2020)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2020</div><div>
+        <h3>12. <a href="https://ui.adsabs.harvard.edu/abs/2020ApJ...894..119D" target="_blank" rel="noopener">The Dragonfly Wide Field Survey. I. Telescope, Survey Design, and Data Characterization</a></h3>
+        <div class="authors"><b>Danieli S.</b>, Lokhorst D., Zhang J., Merritt A., van Dokkum P., Abraham R., Conroy C., Gilhuly C., Greco J., Janssens S., Li J., Liu Q., et al.</div>
+        <div class="venue">The Astrophysical Journal, 894, 119 (2020)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>11. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...880...91V" target="_blank" rel="noopener">Spatially Resolved Stellar Kinematics of the Ultra-diffuse Galaxy Dragonfly 44. I. Observations, Kinematics, and Cold Dark Matter Halo Fits</a></h3>
+        <div class="authors">van Dokkum P., Wasserman A., <b>Danieli S.</b>, Abraham R., Brodie J., Conroy C., Forbes D., Martin C., Matuszewski M., Romanowsky A., Villaume A.</div>
+        <div class="venue">The Astrophysical Journal, 880, 91 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>10. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...875..155D" target="_blank" rel="noopener">Revisiting the Size-Luminosity Relation in the Era of Ultra Diffuse Galaxies</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P.</div>
+        <div class="venue">The Astrophysical Journal, 875, 155 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>9. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...874L..12D" target="_blank" rel="noopener">Still Missing Dark Matter: KCWI High-resolution Stellar Kinematics of NGC1052-DF2</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P., Conroy C., Abraham R., Romanowsky A.</div>
+        <div class="venue">The Astrophysical Journal Letters, 874, L12 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>8. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...874L...5V" target="_blank" rel="noopener">A Second Galaxy Missing Dark Matter in the NGC 1052 Group</a></h3>
+        <div class="authors">van Dokkum P., <b>Danieli S.</b>, Abraham R., Conroy C., Romanowsky A.</div>
+        <div class="venue">The Astrophysical Journal Letters, 874, L5 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>7. <a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...868...96C" target="_blank" rel="noopener">The Dragonfly Nearby Galaxies Survey. V. HST/ACS Observations of 23 Low Surface Brightness Objects in the Fields of NGC 1052, NGC 1084, M96, and NGC 4258</a></h3>
+        <div class="authors">Cohen Y., van Dokkum P., <b>Danieli S.</b>, Romanowsky A., Abraham R., Merritt A., Zhang J., Mowla L., Kruijssen J., Conroy C., Wasserman A.</div>
+        <div class="venue">The Astrophysical Journal, 868, 96 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>6. <a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...864L..18V" target="_blank" rel="noopener">The Distance of the Dark Matter Deficient Galaxy NGC 1052-DF2</a></h3>
+        <div class="authors">van Dokkum P., <b>Danieli S.</b>, Cohen Y., Romanowsky A., Conroy C.</div>
+        <div class="venue">The Astrophysical Journal Letters, 864, L18 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>5. <a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...856L..30V" target="_blank" rel="noopener">An Enigmatic Population of Luminous Globular Clusters in a Galaxy Lacking Dark Matter</a></h3>
+        <div class="authors">van Dokkum P., Cohen Y., <b>Danieli S.</b>, Kruijssen J., Romanowsky A., Merritt A., Abraham R., Brodie J., Conroy C., Lokhorst D., Mowla L., O'Sullivan E., et al.</div>
+        <div class="venue">The Astrophysical Journal Letters, 856, L30 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>4. <a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...856...69D" target="_blank" rel="noopener">Hunting Faint Dwarf Galaxies in the Field Using Integrated Light Surveys</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P., Conroy C.</div>
+        <div class="venue">The Astrophysical Journal, 856, 69 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>3. <a href="https://ui.adsabs.harvard.edu/abs/2018Natur.555..629V" target="_blank" rel="noopener">A galaxy lacking dark matter</a></h3>
+        <div class="authors">van Dokkum P., <b>Danieli S.</b>, Cohen Y., Merritt A., Romanowsky A., Abraham R., Brodie J., Conroy C., Lokhorst D., Mowla L., O'Sullivan E., Zhang J.</div>
+        <div class="venue">Nature, 555, 629-632 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2017</div><div>
+        <h3>2. <a href="https://ui.adsabs.harvard.edu/abs/2017ApJ...837..136D" target="_blank" rel="noopener">The Dragonfly Nearby Galaxies Survey. III. The Luminosity Function of the M101 Group</a></h3>
+        <div class="authors"><b>Danieli S.</b>, van Dokkum P., Merritt A., Abraham R., Zhang J., Karachentsev I., Makarova L.</div>
+        <div class="venue">The Astrophysical Journal, 837, 136 (2017)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2016</div><div>
+        <h3>1. <a href="https://ui.adsabs.harvard.edu/abs/2016ApJ...833..168M" target="_blank" rel="noopener">The Dragonfly Nearby Galaxies Survey. II. Ultra-Diffuse Galaxies near the Elliptical Galaxy NGC 5485</a></h3>
+        <div class="authors">Merritt A., van Dokkum P., <b>Danieli S.</b>, Abraham R., Zhang J., Karachentsev I., Makarova L.</div>
+        <div class="venue">The Astrophysical Journal, 833, 168 (2016)</div>
+      </div></div>
+
+      <h3 class="subhead">Additional publications</h3>
+      <p class="subnote">Co-authored papers.</p>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>36. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1001L..42C" target="_blank" rel="noopener">ELVES-Field: Isolated Dwarf Galaxy Quenched Fractions Rise below M<sub>*</sub> ≍ 10<sup>7</sup> M<sub>⊙</sub></a></h3>
+        <div class="authors">Carlsten S., Li J., Greene J., Drlica-Wagner A., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal Letters, 1001, L42 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>35. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ..1001..244C" target="_blank" rel="noopener">A Sample of Nearby Isolated Dwarf Galaxies: A First Look at the Mass Function of Field Dwarfs</a></h3>
+        <div class="authors">Carlsten S., Li J., Greene J., Drlica-Wagner A., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal, 1001, 244 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>34. <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260315860K" target="_blank" rel="noopener">A Third Galaxy Missing Dark Matter along a Trail of Galaxies in the NGC 1052 Field</a></h3>
+        <div class="authors">Keim M., van Dokkum P., Shen Z., <b>Danieli S.</b>, Pasha I.</div>
+        <div class="venue">arXiv:2603.15860 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2026</div><div>
+        <h3>33. <a href="https://ui.adsabs.harvard.edu/abs/2026ApJ...998L..27V" target="_blank" rel="noopener">JWST Confirmation of a Runaway Supermassive Black Hole via Its Supersonic Bow Shock</a></h3>
+        <div class="authors">van Dokkum P., Jennings C., Pasha I., Conroy C., Kaul I., Abraham R., <b>Danieli S.</b>, Romanowsky A., Tremblay G.</div>
+        <div class="venue">The Astrophysical Journal Letters, 998, L27 (2026)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>32. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...988..165K" target="_blank" rel="noopener">Kinematic Confirmation of a Remarkable Linear Trail of Galaxies in the NGC 1052 Field, Consistent with Formation in a High-speed Bullet Dwarf Collision</a></h3>
+        <div class="authors">Keim M., van Dokkum P., Shen Z., Souchereau H., Pasha I., <b>Danieli S.</b>, Abraham R., Romanowsky A., Tang Y.</div>
+        <div class="venue">The Astrophysical Journal, 988, 165 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>31. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...986L..18L" target="_blank" rel="noopener">Candidate Dark Galaxy-2: Validation and Analysis of an Almost Dark Galaxy in the Perseus Cluster</a></h3>
+        <div class="authors">Li D., Liu Q., Eadie G., Abraham R., Marleau F., Harris W., van Dokkum P., Romanowsky A., <b>Danieli S.</b>, Brown P., Stringer A.</div>
+        <div class="venue">The Astrophysical Journal Letters, 986, L18 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>30. <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.539..674H" target="_blank" rel="noopener">Investigating the Ultra-diffuse Galaxy NGC5846_UDG1 through the Kinematics of its Rich Globular Cluster System</a></h3>
+        <div class="authors">Haacke L., Forbes D., Gannon J., <b>Danieli S.</b>, Brodie J., Pfeffer J., Romanowsky A., van Dokkum P., Janssens S., Buzzo M., Shen Z.</div>
+        <div class="venue">Monthly Notices of the Royal Astronomical Society, 539, 674-689 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>29. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...984..147L" target="_blank" rel="noopener">Discovery of Two Ultra-diffuse Galaxies with Unusually Bright Globular Cluster Luminosity Functions via a Mark-dependently Thinned Point Process (MATHPOP)</a></h3>
+        <div class="authors">Li D., Eadie G., Brown P., Harris W., Abraham R., van Dokkum P., Janssens S., Berek S., <b>Danieli S.</b>, Romanowsky A., Speagle J.</div>
+        <div class="venue">The Astrophysical Journal, 984, 147 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>28. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...982....1T" target="_blank" rel="noopener">An Unexplained Origin for the Unusual Globular Cluster System in the Ultradiffuse Galaxy FCC 224</a></h3>
+        <div class="authors">Tang Y., Romanowsky A., Gannon J., Janssens S., Brodie J., Bundy K., Buzzo M., Cabrera E., <b>Danieli S.</b>, Ferr\'e-Mateu A., Forbes D., van Dokkum P.</div>
+        <div class="venue">The Astrophysical Journal, 982, 1 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>27. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...979..175L" target="_blank" rel="noopener">Fuzzy Galaxies or Cirrus? Decomposition of Galactic Cirrus in Deep Wide-field Images</a></h3>
+        <div class="authors">Liu Q., Abraham R., Martin P., Bowman W., Dokkum P., <b>Danieli S.</b>, Patel E., Janssens S., Shen Z., Chen S., Karunakaran A., Keim M., et al.</div>
+        <div class="venue">The Astrophysical Journal, 979, 175 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2025</div><div>
+        <h3>26. <a href="https://ui.adsabs.harvard.edu/abs/2025ApJ...978...21T" target="_blank" rel="noopener">Testing the Bullet Dwarf Collision Scenario in the NGC 1052 Group through Morphologies and Stellar Populations</a></h3>
+        <div class="authors">Tang Y., Romanowsky A., van Dokkum P., Jarrett T., Bundy K., Buzzo M., <b>Danieli S.</b>, Gannon J., Keim M., Laine S., Shen Z.</div>
+        <div class="venue">The Astrophysical Journal, 978, 21 (2025)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2024</div><div>
+        <h3>25. <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..23L" target="_blank" rel="noopener">Hedgehog: An Isolated Quiescent Dwarf Galaxy at 2.4 Mpc</a></h3>
+        <div class="authors">Li J., Greene J., Carlsten S., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal Letters, 975, L23 (2024)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2024</div><div>
+        <h3>24. <a href="https://ui.adsabs.harvard.edu/abs/2024ApJ...974..273M" target="_blank" rel="noopener">A Nonparametric Morphological Analysis of Halpha Emission in Bright Dwarfs Using the Merian Survey</a></h3>
+        <div class="authors">Mintz A., Greene J., Kado-Fong E., <b>Danieli S.</b>, Li J., Luo Y., Leauthaud A., Baldassare V., Huang S., Peter A., Bhattacharyya J., Li M., et al.</div>
+        <div class="venue">The Astrophysical Journal, 974, 273 (2024)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2024</div><div>
+        <h3>23. <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.1789G" target="_blank" rel="noopener">Analysis of galaxies at the extremes: a kinematic analysis of the Virgo cluster dwarfs VCC 9 and VCC 1448 using the Keck cosmic web imager</a></h3>
+        <div class="authors">Gannon J., Forbes D., Romanowsky A., Brodie J., Haacke L., Ferr\'e-Mateu A., <b>Danieli S.</b>, van Dokkum P., Buzzo M., Couch W., Shen Z.</div>
+        <div class="venue">Monthly Notices of the Royal Astronomical Society, 531, 1789-1804 (2024)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2024</div><div>
+        <h3>22. <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.530.4988L" target="_blank" rel="noopener">The Merian survey: design, construction, and characterization of a filter set optimized to find dwarf galaxies and measure their dark matter halo properties with weak lensing</a></h3>
+        <div class="authors">Luo Y., Leauthaud A., Greene J., Huang S., Kado-Fong E., <b>Danieli S.</b>, Li T., Li J., Blanco D., Wasleske E., Wick J., Mintz A., et al.</div>
+        <div class="venue">Monthly Notices of the Royal Astronomical Society, 530, 4988-5005 (2024)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>21. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...955....2L" target="_blank" rel="noopener">Beyond Ultra-diffuse Galaxies. II. Environmental Quenching of Mass-Size Outliers among the Satellites of Milky Way Analogs</a></h3>
+        <div class="authors">Li J., Greene J., Greco J., Beaton R., <b>Danieli S.</b>, Goulding A., Huang S., Kado-Fong E.</div>
+        <div class="venue">The Astrophysical Journal, 955, 2 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>20. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...955....1L" target="_blank" rel="noopener">Beyond Ultra-diffuse Galaxies. I. Mass-Size Outliers among the Satellites of Milky Way Analogs</a></h3>
+        <div class="authors">Li J., Greene J., Greco J., Huang S., Melchior P., Beaton R., Casey K., <b>Danieli S.</b>, Goulding A., Joseph R., Kado-Fong E., Kim J., et al.</div>
+        <div class="venue">The Astrophysical Journal, 955, 1 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2023</div><div>
+        <h3>19. <a href="https://ui.adsabs.harvard.edu/abs/2023ApJ...946L..50V" target="_blank" rel="noopener">A Candidate Runaway Supermassive Black Hole Identified by Shocks and Star Formation in its Wake</a></h3>
+        <div class="authors">van Dokkum P., Pasha I., Buzzo M., LaMassa S., Shen Z., Keim M., Abraham R., Conroy C., <b>Danieli S.</b>, Mitra K., Nagai D., Natarajan P., et al.</div>
+        <div class="venue">The Astrophysical Journal Letters, 946, L50 (2023)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>18. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...940L...9V" target="_blank" rel="noopener">Monochromatic Globular Clusters as a Critical Test of Formation Models for the Dark Matter-deficient Galaxies NGC 1052-DF2 and NGC 1052-DF4</a></h3>
+        <div class="authors">van Dokkum P., Shen Z., Romanowsky A., Abraham R., Conroy C., <b>Danieli S.</b>, Chowdhury D., Keim M., Kruijssen J., Leja J., Trujillo-Gomez S.</div>
+        <div class="venue">The Astrophysical Journal Letters, 940, L9 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>17. <a href="https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.5335L" target="_blank" rel="noopener">Reaching for the Edge I: probing the outskirts of massive galaxies with HSC, DECaLS, SDSS, and Dragonfly</a></h3>
+        <div class="authors">Li J., Huang S., Leauthaud A., Moustakas J., <b>Danieli S.</b>, Greene J., Abraham R., Ardila F., Kado-Fong E., Lokhorst D., Lupton R., Price P.</div>
+        <div class="venue">Monthly Notices of the Royal Astronomical Society, 515, 5335-5357 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>16. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...935....3L" target="_blank" rel="noopener">Light from the Darkness: Detecting Ultra-diffuse Galaxies in the Perseus Cluster through Over-densities of Globular Clusters with a Log-Gaussian Cox Process</a></h3>
+        <div class="authors">Li D., Eadie G., Abraham R., Brown P., Harris W., Janssens S., Romanowsky A., van Dokkum P., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal, 935, 3 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>15. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...933..150G" target="_blank" rel="noopener">The Nature of Low-surface-brightness Galaxies in the Hyper Suprime-Cam Survey</a></h3>
+        <div class="authors">Greene J., Greco J., Goulding A., Huang S., Kado-Fong E., <b>Danieli S.</b>, Li J., Kim J., Komiyama Y., Leauthaud A., MacArthur L., Sif\'on C.</div>
+        <div class="venue">The Astrophysical Journal, 933, 150 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>14. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...933...47C" target="_blank" rel="noopener">The Exploration of Local VolumE Satellites (ELVES) Survey: A Nearly Volume-limited Sample of Nearby Dwarf Satellite Systems</a></h3>
+        <div class="authors">Carlsten S., Greene J., Beaton R., <b>Danieli S.</b>, Greco J.</div>
+        <div class="venue">The Astrophysical Journal, 933, 47 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>13. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...932...44G" target="_blank" rel="noopener">Stellar Halos from the The Dragonfly Edge-on Galaxies Survey</a></h3>
+        <div class="authors">Gilhuly C., Merritt A., Abraham R., <b>Danieli S.</b>, Lokhorst D., Liu Q., van Dokkum P., Conroy C., Greco J.</div>
+        <div class="venue">The Astrophysical Journal, 932, 44 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>12. <a href="https://ui.adsabs.harvard.edu/abs/2022Natur.605..435V" target="_blank" rel="noopener">A trail of dark-matter-free galaxies from a bullet-dwarf collision</a></h3>
+        <div class="authors">van Dokkum P., Shen Z., Keim M., Trujillo-Gomez S., <b>Danieli S.</b>, Dutta Chowdhury D., Abraham R., Conroy C., Kruijssen J., Nagai D., Romanowsky A.</div>
+        <div class="venue">Nature, 605, 435-439 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>11. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...927..136L" target="_blank" rel="noopener">A Giant Shell of Ionized Gas Discovered near M82 with the Dragonfly Spectral Line Mapper Pathfinder</a></h3>
+        <div class="authors">Lokhorst D., Abraham R., Pasha I., van Dokkum P., Chen S., Miller T., <b>Danieli S.</b>, Greco J., Zhang J., Merritt A., Conroy C.</div>
+        <div class="venue">The Astrophysical Journal, 927, 136 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>10. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...925..219L" target="_blank" rel="noopener">A Method to Characterize the Wide-angle Point-Spread Function of Astronomical Images</a></h3>
+        <div class="authors">Liu Q., Abraham R., Gilhuly C., van Dokkum P., Martin P., Li J., Greco J., Lokhorst D., Chen S., <b>Danieli S.</b>, Keim M., Merritt A., et al.</div>
+        <div class="venue">The Astrophysical Journal, 925, 219 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2022</div><div>
+        <h3>9. <a href="https://ui.adsabs.harvard.edu/abs/2022ApJ...924...32V" target="_blank" rel="noopener">Spatially Resolved Stellar Spectroscopy of the Ultra-diffuse Galaxy Dragonfly 44. III. Evidence for an Unexpected Star Formation History under Conventional Galaxy Evolution Processes</a></h3>
+        <div class="authors">Villaume A., Romanowsky A., Brodie J., van Dokkum P., Conroy C., Forbes D., <b>Danieli S.</b>, Martin C., Matuszewski M.</div>
+        <div class="venue">The Astrophysical Journal, 924, 32 (2022)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>8. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...923L..21P" target="_blank" rel="noopener">A Nascent Tidal Dwarf Galaxy Forming within the Northern H I Streamer of M82</a></h3>
+        <div class="authors">Pasha I., Lokhorst D., van Dokkum P., Chen S., Abraham R., Greco J., <b>Danieli S.</b>, Miller T., Lippitt E., Polzin A., Shen Z., Keim M., et al.</div>
+        <div class="venue">The Astrophysical Journal Letters, 923, L21 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2021</div><div>
+        <h3>7. <a href="https://ui.adsabs.harvard.edu/abs/2021ApJ...917...17G" target="_blank" rel="noopener">A Search for Wandering Black Holes in the Milky Way with Gaia and DECaLS</a></h3>
+        <div class="authors">Greene J., Lancaster L., Ting Y., Koposov S., <b>Danieli S.</b>, Huang S., Jiang F., Greco J., Strader J.</div>
+        <div class="venue">The Astrophysical Journal, 917, 17 (2021)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2020</div><div>
+        <h3>6. <a href="https://ui.adsabs.harvard.edu/abs/2020ApJ...897..108G" target="_blank" rel="noopener">The Dragonfly Edge-on Galaxies Survey: Shaping the Outer disk of NGC 4565 via Accretion</a></h3>
+        <div class="authors">Gilhuly C., Hendel D., Merritt A., Abraham R., <b>Danieli S.</b>, Lokhorst D., Liu Q., van Dokkum P., Conroy C., Greco J.</div>
+        <div class="venue">The Astrophysical Journal, 897, 108 (2020)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>5. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...885..155W" target="_blank" rel="noopener">Spatially Resolved Stellar Kinematics of the Ultra-diffuse Galaxy Dragonfly 44. II. Constraints on Fuzzy Dark Matter</a></h3>
+        <div class="authors">Wasserman A., van Dokkum P., Romanowsky A., Brodie J., <b>Danieli S.</b>, Forbes D., Abraham R., Martin C., Matuszewski M., Villaume A., Tamanas J., Profumo S.</div>
+        <div class="venue">The Astrophysical Journal, 885, 155 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2019</div><div>
+        <h3>4. <a href="https://ui.adsabs.harvard.edu/abs/2019ApJ...883L..32V" target="_blank" rel="noopener">Dragonfly Imaging of the Galaxy NGC 5907: A Different View of the Iconic Stellar Stream</a></h3>
+        <div class="authors">van Dokkum P., Gilhuly C., Bonaca A., Merritt A., <b>Danieli S.</b>, Lokhorst D., Abraham R., Conroy C., Greco J.</div>
+        <div class="venue">The Astrophysical Journal Letters, 883, L32 (2019)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2018</div><div>
+        <h3>3. <a href="https://ui.adsabs.harvard.edu/abs/2018ApJ...863L..15W" target="_blank" rel="noopener">A Deficit of Dark Matter from Jeans Modeling of the Ultra-diffuse Galaxy NGC 1052-DF2</a></h3>
+        <div class="authors">Wasserman A., Romanowsky A., Brodie J., van Dokkum P., Conroy C., Abraham R., Cohen Y., <b>Danieli S.</b></div>
+        <div class="venue">The Astrophysical Journal Letters, 863, L15 (2018)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2017</div><div>
+        <h3>2. <a href="https://ui.adsabs.harvard.edu/abs/2017ApJ...844L..11V" target="_blank" rel="noopener">Extensive Globular Cluster Systems Associated with Ultra Diffuse Galaxies in the Coma Cluster</a></h3>
+        <div class="authors">van Dokkum P., Abraham R., Romanowsky A., Brodie J., Conroy C., <b>Danieli S.</b>, Lokhorst D., Merritt A., Mowla L., Zhang J.</div>
+        <div class="venue">The Astrophysical Journal Letters, 844, L11 (2017)</div>
+      </div></div>
+      <div class="pub"><div class="yr">2016</div><div>
+        <h3>1. <a href="https://ui.adsabs.harvard.edu/abs/2016ApJ...828L...6V" target="_blank" rel="noopener">A High Stellar Velocity Dispersion and ~100 Globular Clusters for the Ultra-diffuse Galaxy Dragonfly 44</a></h3>
+        <div class="authors">van Dokkum P., Abraham R., Brodie J., Conroy C., <b>Danieli S.</b>, Merritt A., Mowla L., Romanowsky A., Zhang J.</div>
+        <div class="venue">The Astrophysical Journal Letters, 828, L6 (2016)</div>
+      </div></div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== NEWS ==================== -->
+<div class="page" id="news">
+  <div class="page-hero"><div class="bgimg"></div><h1>News &amp; Updates</h1></div>
+  <main>
+    <section class="block">
+      <p class="eyebrow">Featured</p>
+      <div class="feature">
+        <img src="img/daniel.jpg" alt="Daniel Pakula">
+        <div>
+          <div class="date">May 26, 2026 · Tel Aviv University News</div>
+          <h3>Uncovering Hidden Galaxies</h3>
+          <p>Tel Aviv University featured our group's Daniel Pakula and his work developing an automated system for detecting faint dwarf galaxies with the Dragonfly telescope — a system that has already identified galaxies that previous surveys appear to have missed, helping to test the ΛCDM cosmological model. The article also has some great advice for undergraduates who want to get into research early.</p>
+          <a class="more" href="https://english.tau.ac.il/news/new_galaxy" target="_blank" rel="noopener">Read the full article on the TAU website ↗</a>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="date">June 2026</div>
+        <h3>New group website is live</h3>
+        <p>Welcome to the new home of the Danieli Research Group — research themes, the team, publications, and news, all in one place.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <h3>Contact Us</h3>
+      <p class="addr">
+        Kaplun Building, Room 117<br>
+        Department of Astrophysics<br>
+        School of Physics and Astronomy<br>
+        Tel Aviv University<br><br>
+        30 Haim Levanon St., Ramat Aviv<br>
+        Tel Aviv 69978, Israel<br><br>
+        <a href="mailto:sdanieli@tauex.tau.ac.il">sdanieli@tauex.tau.ac.il</a>
+      </p>
+    </div>
+    <div>
+      <h3>Send a message</h3>
+      <form id="contact">
+        <div class="row">
+          <input type="text" id="cname" placeholder="Name" required>
+          <input type="email" id="cemail" placeholder="Email" required>
+        </div>
+        <input type="text" id="csubj" placeholder="Subject" style="margin-bottom:14px">
+        <textarea id="cmsg" placeholder="Type your message here..." required></textarea>
+        <button class="btn" type="submit" style="margin-top:0">Send</button>
+        <p style="color:var(--faint);font-size:.78rem;margin-top:10px">Opens your email app with the message pre-filled.</p>
+      </form>
+    </div>
+  </div>
+  <div class="legal">
+    <div>© 2026 The Danieli Research Group · Tel Aviv University</div>
+    <div><a href="https://twitter.com" target="_blank" rel="noopener">Twitter / X</a> &nbsp;·&nbsp; <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></div>
+  </div>
+</footer>
+
+<script>
+  // in-page router
+  const pages = document.querySelectorAll('.page');
+  function go(id){
+    pages.forEach(p=>p.classList.toggle('active', p.id===id));
+    document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active', b.dataset.page===id));
+    window.scrollTo(0,0);
+    history.replaceState(null,'','#'+id);
+  }
+  document.querySelectorAll('[data-page]').forEach(el=>
+    el.addEventListener('click',e=>{e.preventDefault();go(el.dataset.page)}));
+  // deep link: open #team etc. directly
+  if(location.hash && document.getElementById(location.hash.slice(1))) go(location.hash.slice(1));
+
+  // contact form -> mailto
+  document.getElementById('contact').addEventListener('submit',e=>{
+    e.preventDefault();
+    const n=encodeURIComponent(cname.value), s=encodeURIComponent(csubj.value||'Website inquiry'),
+          m=encodeURIComponent(cmsg.value+'\n\n— '+cname.value+' ('+cemail.value+')');
+    location.href=`mailto:sdanieli@tauex.tau.ac.il?subject=${s}&body=${m}`;
+  });
+</script>
+</body>
+</html>
