@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="lvm-title lvm-desc">
+<title id="lvm-title">Stylized Local Volume map of the ELVES survey family</title>
+<desc id="lvm-desc">A schematic circular Local Volume containing dense Milky Way-mass host environments for ELVES, lower-mass dwarf-host environments for ELVES-Dwarf, and isolated field dwarfs for ELVES-Field.</desc>
+<defs><radialGradient id="lvm-glow" cx="50%" cy="45%" r="56%">
+<stop offset="0%" stop-color="#3a6bff" stop-opacity="0.10"/>
+<stop offset="72%" stop-color="#3a6bff" stop-opacity="0.03"/>
+<stop offset="100%" stop-color="#3a6bff" stop-opacity="0"/>
+</radialGradient></defs>
+<circle cx="300" cy="300" r="260" fill="url(#lvm-glow)"/>
+<circle cx="300" cy="300" r="260" fill="none" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+<text x="300" y="20" text-anchor="middle" fill="#aeb2bd" font-family="Sora, Inter, sans-serif" font-size="18" font-weight="400">Local Volume</text>
+<circle cx="94" cy="250" r="1.7" fill="#94a3b8" opacity="0.3"/>
+<circle cx="152" cy="112" r="1.5" fill="#94a3b8" opacity="0.3"/>
+<circle cx="282" cy="196" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="354" cy="112" r="1.6" fill="#94a3b8" opacity="0.3"/>
+<circle cx="516" cy="170" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="546" cy="376" r="1.7" fill="#94a3b8" opacity="0.3"/>
+<circle cx="432" cy="454" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="188" cy="522" r="1.6" fill="#94a3b8" opacity="0.3"/>
+<circle cx="72" cy="388" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="312" cy="558" r="1.5" fill="#94a3b8" opacity="0.3"/>
+<circle cx="214" cy="118" r="1.3" fill="#94a3b8" opacity="0.3"/>
+<circle cx="548" cy="270" r="1.5" fill="#94a3b8" opacity="0.3"/>
+<circle cx="392" cy="92" r="1.3" fill="#94a3b8" opacity="0.3"/>
+<circle cx="86" cy="182" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="506" cy="462" r="1.4" fill="#94a3b8" opacity="0.3"/>
+<circle cx="148" cy="504" r="1.3" fill="#94a3b8" opacity="0.3"/>
+<circle cx="214" cy="218" r="70" fill="#d1651f" opacity="0.12"/>
+<circle cx="214" cy="218" r="11" fill="#d1651f" opacity="0.98"/>
+<circle cx="168" cy="195" r="3.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="181" cy="244" r="2.8" fill="#d1651f" opacity="0.78"/>
+<circle cx="196" cy="174" r="3.1" fill="#d1651f" opacity="0.78"/>
+<circle cx="205" cy="268" r="2.7" fill="#d1651f" opacity="0.78"/>
+<circle cx="224" cy="165" r="2.9" fill="#d1651f" opacity="0.78"/>
+<circle cx="236" cy="247" r="3.2" fill="#d1651f" opacity="0.78"/>
+<circle cx="250" cy="203" r="2.7" fill="#d1651f" opacity="0.78"/>
+<circle cx="262" cy="226" r="3.1" fill="#d1651f" opacity="0.78"/>
+<circle cx="176" cy="220" r="2.5" fill="#d1651f" opacity="0.78"/>
+<circle cx="224" cy="292" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="282" cy="188" r="2.5" fill="#d1651f" opacity="0.78"/>
+<circle cx="151" cy="233" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="240" cy="185" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="190" cy="292" r="2.2" fill="#d1651f" opacity="0.78"/>
+<circle cx="388" cy="334" r="65" fill="#d1651f" opacity="0.12"/>
+<circle cx="388" cy="334" r="10" fill="#d1651f" opacity="0.98"/>
+<circle cx="340" cy="314" r="3.1" fill="#d1651f" opacity="0.78"/>
+<circle cx="352" cy="366" r="2.5" fill="#d1651f" opacity="0.78"/>
+<circle cx="373" cy="282" r="2.8" fill="#d1651f" opacity="0.78"/>
+<circle cx="398" cy="284" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="420" cy="316" r="2.9" fill="#d1651f" opacity="0.78"/>
+<circle cx="438" cy="352" r="2.5" fill="#d1651f" opacity="0.78"/>
+<circle cx="390" cy="388" r="2.8" fill="#d1651f" opacity="0.78"/>
+<circle cx="356" cy="342" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="440" cy="296" r="2.2" fill="#d1651f" opacity="0.78"/>
+<circle cx="410" cy="372" r="2.4" fill="#d1651f" opacity="0.78"/>
+<circle cx="330" cy="350" r="2.2" fill="#d1651f" opacity="0.78"/>
+<circle cx="372" cy="364" r="2.1" fill="#d1651f" opacity="0.78"/>
+<circle cx="166" cy="390" r="38" fill="#1a9e8a" opacity="0.13"/>
+<circle cx="166" cy="390" r="4.6" fill="#1a9e8a" opacity="0.98"/>
+<circle cx="139" cy="374" r="2.4" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="153" cy="417" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="181" cy="361" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="195" cy="397" r="2.2" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="430" cy="180" r="36" fill="#1a9e8a" opacity="0.13"/>
+<circle cx="430" cy="180" r="4.4" fill="#1a9e8a" opacity="0.98"/>
+<circle cx="404" cy="166" r="2.2" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="422" cy="211" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="452" cy="157" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="462" cy="188" r="2.0" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="310" cy="444" r="33" fill="#1a9e8a" opacity="0.13"/>
+<circle cx="310" cy="444" r="4.2" fill="#1a9e8a" opacity="0.98"/>
+<circle cx="286" cy="431" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="321" cy="416" r="2.0" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="336" cy="456" r="2.1" fill="#1a9e8a" opacity="0.78"/>
+<circle cx="132" cy="160" r="3.2" fill="#4a82e0" opacity="0.96"/>
+<circle cx="305" cy="132" r="3.0" fill="#4a82e0" opacity="0.96"/>
+<circle cx="486" cy="246" r="3.3" fill="#4a82e0" opacity="0.96"/>
+<circle cx="498" cy="402" r="3.0" fill="#4a82e0" opacity="0.96"/>
+<circle cx="242" cy="388" r="2.8" fill="#4a82e0" opacity="0.96"/>
+<circle cx="105" cy="320" r="2.9" fill="#4a82e0" opacity="0.96"/>
+<circle cx="355" cy="520" r="3.2" fill="#4a82e0" opacity="0.96"/>
+<circle cx="461" cy="494" r="2.8" fill="#4a82e0" opacity="0.96"/>
+<circle cx="262" cy="95" r="2.7" fill="#4a82e0" opacity="0.96"/>
+<circle cx="522" cy="306" r="2.9" fill="#4a82e0" opacity="0.96"/>
+<circle cx="118" cy="468" r="2.8" fill="#4a82e0" opacity="0.96"/>
+<circle cx="378" cy="210" r="2.7" fill="#4a82e0" opacity="0.96"/>
+<circle cx="218" cy="498" r="2.9" fill="#4a82e0" opacity="0.96"/>
+<circle cx="455" cy="112" r="2.6" fill="#4a82e0" opacity="0.96"/>
+</svg>
