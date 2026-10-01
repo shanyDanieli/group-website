@@ -315,6 +315,19 @@
         </div>
       </div>
     </section>
+    <section class="block" id="programs">
+      <div class="cols">
+        <div><p class="eyebrow">Telescope programs</p><h2>Observing programs</h2></div>
+        <div class="survey">
+          <div class="tag">JWST · Cycle 5 · GO 11277</div>
+          <h3>Quenching in Isolation: JWST Star-Formation Histories of Field Dwarf Galaxies</h3>
+          <p>Isolated dwarf galaxies were long thought to be uniformly star-forming, yet results from ELVES-Field show that about 30% of isolated dwarfs below M<sub>*</sub> ~ 10<sup>7</sup> M<sub>⊙</sub> have stopped forming stars. This program uses JWST/NIRCam imaging of a complete, volume-limited sample of quenched, isolated dwarfs within 10 Mpc to measure precise tip-of-the-red-giant-branch distances and star-formation histories, revealing when these galaxies shut down and whether reionization, internal feedback, or dwarf–dwarf interactions are responsible.</p>
+          <p style="margin-top:14px"><b style="color:var(--ink);font-weight:500">PI:</b> Shany Danieli · <b style="color:var(--ink);font-weight:500">Co-Is:</b> Jenny Greene, Jiaxuan Li, Scott Carlsten, Inbar Havilio, Rachael Beaton, Goni Elbaz, Grace Telford</p>
+          <div class="stats"><div><b>20.9</b><span>Hours</span></div><div><b>14</b><span>Field dwarfs</span></div><div><b>2027</b><span>Data expected</span></div></div>
+          <a class="more" href="https://www.stsci.edu/jwst-program-info/program/?program=11277" target="_blank" rel="noopener">Program details at STScI ↗</a>
+        </div>
+      </div>
+    </section>
     <section class="block">
       <p class="eyebrow">Coming soon</p>
       <h2>Research themes</h2>
@@ -816,6 +829,13 @@
         <h3>New group website is live</h3>
         <p>Welcome to the new home of the Danieli Research Group — research themes, the team, publications, and news, all in one place.</p>
       </div>
+
+      <div class="news-item">
+        <div class="date">March 13, 2026 · JWST Cycle 5</div>
+        <h3>JWST time awarded to study quenching in isolated dwarf galaxies</h3>
+        <p>Our JWST Cycle 5 program “Quenching in Isolation: JWST Star-Formation Histories of Field Dwarf Galaxies” (GO 11277, PI Danieli) was awarded 20.9 hours of NIRCam imaging. We will observe 14 quenched, isolated dwarf galaxies within 10 Mpc to measure their distances and star-formation histories, and find out when and why these galaxies stopped forming stars far from any massive neighbor. Data are expected in 2027.</p>
+        <a class="more" href="#research" data-page="research" data-scroll="programs">Read more on our Research page →</a>
+      </div>
     </section>
   </main>
 </div>
@@ -865,7 +885,8 @@
     history.replaceState(null,'','#'+id);
   }
   document.querySelectorAll('[data-page]').forEach(el=>
-    el.addEventListener('click',e=>{e.preventDefault();go(el.dataset.page)}));
+    el.addEventListener('click',e=>{e.preventDefault();go(el.dataset.page);
+      if(el.dataset.scroll) document.getElementById(el.dataset.scroll).scrollIntoView({behavior:'smooth'})}));
   // deep link: open #team etc. directly
   if(location.hash && document.getElementById(location.hash.slice(1))) go(location.hash.slice(1));
 
