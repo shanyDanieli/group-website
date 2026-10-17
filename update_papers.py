@@ -39,6 +39,7 @@ PUB_SHORT = {"Publications of the Astronomical Society of the Pacific": "PASP"}
 EXCLUDE = {
     "2023arXiv230611784H",  # NANCY community white paper
     "2022arXiv220802781B",  # Rubin LSST community white paper
+    "2026arXiv260726152B",  # DF44 GC system preprint: listed as ApJL 1009, L36 (ADS had not merged them yet)
 }
 
 
